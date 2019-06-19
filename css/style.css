@@ -2,13 +2,14 @@
     width: 100%;
 }
 
-/* .result {
-    
-} */
+.result {
+    /* height: 75vh; */
+    /* overflow: scroll; */
+}
 
 .load {
     width: 100%;
-    border: #f1f8ff solid 2px;
+    border-style: solid 2px;
     border-radius: 25px;
 }
 
