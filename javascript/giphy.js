@@ -1,3 +1,7 @@
+$(document).onload = function(){
+
+}
+
 const fail = ['Car', 'Truck', 'Motorcycle'];
 const gif = $('.GIF');
 const buttons = $('.buttons');
@@ -18,7 +22,6 @@ add.on('click', function(){
 $(document).on('click', '.js-GIF-it', function(){
     const text = $(this).attr('data-gif');
     const queryURL = "https://api.giphy.com/v1/gifs/search?api_key=8dZZXNK8KMqOf8ctUav0BuFe8JYedKdP&q=" + text + "+fail";
-    // gifCounter = gifCounter+4;
     
     $.ajax({
         url: queryURL,
@@ -35,7 +38,7 @@ $(document).on('click', '.js-GIF-it', function(){
             const rating = result[i].rating.toUpperCase();
             const gifRate = $('<p>Rating: ' + rating + '</p>')
             gifCount++;
-            img.attr('src', result[i].images.fixed_height_still.url).attr('data-name', i).attr('data-click', 'false');
+            img.attr('src', result[i].images.fixed_height_still.url).attr('data-name', i).attr('data-click', 'false').addClass('js-img');
             div.append(gifRate);
             div.prepend(img);
             $(div).appendTo('.result').addClass('js-gif-click');
@@ -53,7 +56,7 @@ $(document).on('click', '.js-GIF-it', function(){
                 const div = $('<div>');
                 const rating = result[j].rating.toUpperCase();
                 const gifRate = $('<p>Rating: ' + rating + '</p>') 
-                img.attr('src', result[j].images.fixed_height_still.url).attr('data-name', j).attr('data-click', 'false');
+                img.attr('src', result[j].images.fixed_height_still.url).attr('data-name', j).attr('data-click', 'false').addClass('js-img');
                 console.log(img.attr('src'))
                 div.append(gifRate);
                 div.prepend(img);
@@ -64,14 +67,18 @@ $(document).on('click', '.js-GIF-it', function(){
             gifCount = gifCount + 4
         })
         
-        $(document).on('click', 'img', function(){
-            if ($(this).data('click') === true){
-                console.log()
-                $(this).attr('src', result[$(this).data('name')].images.fixed_height_still.url).attr('data-click', 'false')
+        let clicked = false
+        $(document).on('click', '.js-img', function(){
+            if (clicked){
+                $(this).attr('src', result[$(this).data('name')].images.fixed_height_still.url);
+                return clicked = false;
+                console.log(clicked)
             }
             
-            else if ($(this).data('click') === false){
-                $(this).attr('src', result[$(this).data('name')].images.original.url).attr('data-click', 'true');
+            else {
+                $(this).attr('src', result[$(this).data('name')].images.original.url);
+                clicked = true;
+                console.log(clicked)
             }
         })
     })
