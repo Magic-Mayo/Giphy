@@ -17,17 +17,18 @@ add.on('click', function(){
 
 $(document).on('click', '.js-GIF-it', function(){
     const text = $(this).attr('data-gif');
-    const queryURL = "https://api.giphy.com/v1/gifs/search?api_key=8dZZXNK8KMqOf8ctUav0BuFe8JYedKdP&limit=50&q=" + text + "+fail";
+    const queryURL = "https://api.giphy.com/v1/gifs/search?api_key=8dZZXNK8KMqOf8ctUav0BuFe8JYedKdP&q=" + text + "+fail";
     // gifCounter = gifCounter+4;
-    console.log(gifCounter);
-
+    
     $.ajax({
         url: queryURL,
         method: "GET"
     })
     .then(function(response) {
+        console.log(gifCounter);
+        console.log(gifCount)
         const result = response.data;
-        for (let i = gifCount; i<gifCounter; i++){
+        for (let i = 0; i<4; i++){
             console.log(gifCount)
             const img = $('<img>');
             const div = $('<div>');
@@ -43,9 +44,11 @@ $(document).on('click', '.js-GIF-it', function(){
         
         $('.load-btn').html('<button class="btn border-info load">Load more...</button>')
         $(document).on('click', '.load', function(){
-            gifCounter = gifCounter+4;
+            console.log(gifCounter);
+            console.log(gifCount);
             
-            for (let j = gifCount; j<gifCounter; j++){
+            for (let j = gifCounter; j<gifCount; j++){
+                console.log($(this).attr('class'))
                 const img = $('<img>');
                 const div = $('<div>');
                 const rating = result[j].rating.toUpperCase();
@@ -55,9 +58,10 @@ $(document).on('click', '.js-GIF-it', function(){
                 div.append(gifRate);
                 div.prepend(img);
                 $(div).appendTo('.result').addClass('js-gif-click');
+                console.log(response)
             }
+            gifCounter = gifCounter+4;
             gifCount = gifCount + 4
-            console.log(response)
         })
         
         $(document).on('click', 'img', function(){

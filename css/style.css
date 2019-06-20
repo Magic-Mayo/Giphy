@@ -20,7 +20,7 @@
 
 img {
     opacity: 1;
-    max-height: 200px;
+    height: 200px;
 }
 
 img:hover {
