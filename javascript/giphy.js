@@ -72,7 +72,6 @@ $(document).on('click', '.js-GIF-it', function(){
             if (clicked){
                 $(this).attr('src', result[$(this).data('name')].images.fixed_height_still.url);
                 return clicked = false;
-                console.log(clicked)
             }
             
             else {
