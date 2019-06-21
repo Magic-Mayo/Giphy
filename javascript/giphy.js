@@ -1,7 +1,3 @@
-$(document).onload = function(){
-
-}
-
 const fail = ['Car', 'Truck', 'Motorcycle'];
 const gif = $('.GIF');
 const buttons = $('.buttons');
@@ -28,11 +24,8 @@ $(document).on('click', '.js-GIF-it', function(){
         method: "GET"
     })
     .then(function(response) {
-        console.log(gifCounter);
-        console.log(gifCount)
         const result = response.data;
-        for (let i = 0; i<4; i++){
-            console.log(gifCount)
+        for (let i = gifCount; i<gifCounter; i++){
             const img = $('<img>');
             const div = $('<div>');
             const rating = result[i].rating.toUpperCase();
@@ -42,26 +35,19 @@ $(document).on('click', '.js-GIF-it', function(){
             div.append(gifRate);
             div.prepend(img);
             $(div).appendTo('.result').addClass('js-gif-click');
-            console.log(gifCount)
         }
         
         $('.load-btn').html('<button class="btn border-info load">Load more...</button>')
-        $(document).on('click', '.load', function(){
-            console.log(gifCounter);
-            console.log(gifCount);
-            
+        $(document).on('click', '.load', function(){            
             for (let j = gifCounter; j<gifCount; j++){
-                console.log($(this).attr('class'))
                 const img = $('<img>');
                 const div = $('<div>');
                 const rating = result[j].rating.toUpperCase();
                 const gifRate = $('<p>Rating: ' + rating + '</p>') 
                 img.attr('src', result[j].images.fixed_height_still.url).attr('data-name', j).attr('data-click', 'false').addClass('js-img');
-                console.log(img.attr('src'))
                 div.append(gifRate);
                 div.prepend(img);
                 $(div).appendTo('.result').addClass('js-gif-click');
-                console.log(response)
             }
             gifCounter = gifCounter+4;
             gifCount = gifCount + 4
@@ -77,9 +63,8 @@ $(document).on('click', '.js-GIF-it', function(){
             else {
                 $(this).attr('src', result[$(this).data('name')].images.original.url);
                 clicked = true;
-                console.log(clicked)
             }
         })
+        gifCount = gifCount + 4
     })
-    gifCount = gifCount + 4
 })

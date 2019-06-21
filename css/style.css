@@ -8,10 +8,10 @@
 }
 
 .load {
-    width: 100%;
-    border-style: solid 2px;
+    width: 75vw;
     border-radius: 25px;
     margin-top: -1vh;
+    bottom: 1vh;
 }
 
 .load:hover {
