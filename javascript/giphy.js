@@ -5,13 +5,17 @@ const gifIt = $('.js-GIF-it');
 const add = $('.js-add');
 let gifCount = 0;
 let gifCounter = 4;
+let collapsed = true;
 
 $('#toggler').on('click', function(){
-    if ($(this).hasClass('collapsed')){
-        $(this).html('Expand')
+    console.log(collapsed)
+    if (collapsed){
+        $(this).html('Click to Collapse');
+        collapsed = false;
     }
-    else {
-        $(this).html('Collapse')
+    else if(!collapsed){
+        $(this).html('Click to search GIFs');
+        collapsed = true;
     }
 })
 gif.keyup(function(event){
