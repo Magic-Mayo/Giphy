@@ -6,6 +6,21 @@ const add = $('.js-add');
 let gifCount = 0;
 let gifCounter = 4;
 
+$('#toggler').on('click', function(){
+    if ($(this).hasClass('collapsed')){
+        $(this).html('Expand')
+    }
+    else {
+        $(this).html('Collapse')
+    }
+})
+gif.keyup(function(event){
+    if (event.key === 'Enter'){
+        event.preventDefault();
+        add.click();
+    }
+})
+
 for (let i=0; i<fail.length; i++){
     const btn = $('<button>').text(fail[i]).addClass('js-GIF-it');
     btn.appendTo('.buttons').attr('data-gif', fail[i]);
@@ -13,6 +28,7 @@ for (let i=0; i<fail.length; i++){
 
 add.on('click', function(){
     $('<button>').appendTo('.buttons').text(gif.val()).attr('data-gif', gif.val()).addClass('js-GIF-it');
+    gif.val('')
 })
 
 $(document).on('click', '.js-GIF-it', function(){
@@ -26,10 +42,10 @@ $(document).on('click', '.js-GIF-it', function(){
     .then(function(response) {
         const result = response.data;
         for (let i = gifCount; i<gifCounter; i++){
-            const img = $('<img>');
+            const img = $('<img>').addClass('css-image');
             const div = $('<div>');
             const rating = result[i].rating.toUpperCase();
-            const gifRate = $('<p>Rating: ' + rating + '</p>')
+            const gifRate = $('<p class="rating">Rating: ' + rating + '</p>')
             gifCount++;
             img.attr('src', result[i].images.fixed_height_still.url).attr('data-name', i).attr('data-click', 'false').addClass('js-img');
             div.append(gifRate);
@@ -40,10 +56,10 @@ $(document).on('click', '.js-GIF-it', function(){
         $('.load-btn').html('<button class="btn border-info load">Load more...</button>')
         $(document).on('click', '.load', function(){            
             for (let j = gifCounter; j<gifCount; j++){
-                const img = $('<img>');
+                const img = $('<img>').addClass('css-image');
                 const div = $('<div>');
                 const rating = result[j].rating.toUpperCase();
-                const gifRate = $('<p>Rating: ' + rating + '</p>') 
+                const gifRate = $('<p class="rating">Rating: ' + rating + '</p>') 
                 img.attr('src', result[j].images.fixed_height_still.url).attr('data-name', j).attr('data-click', 'false').addClass('js-img');
                 div.append(gifRate);
                 div.prepend(img);
