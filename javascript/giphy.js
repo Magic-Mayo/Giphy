@@ -4,7 +4,7 @@ const buttons = $('.buttons');
 const gifIt = $('.js-GIF-it');
 const add = $('.js-add');
 let gifCount = 0;
-let gifCounter = 4;
+let gifCounter = 10;
 let collapsed = true;
 
 $('#toggler').on('click', function(){
@@ -60,6 +60,7 @@ $(document).on('click', '.js-GIF-it', function(){
         $('.load-btn').html('<button class="btn border-info load">Load more...</button>')
         $(document).on('click', '.load', function(){            
             for (let j = gifCounter; j<gifCount; j++){
+                console.log(result)
                 const img = $('<img>').addClass('css-image');
                 const div = $('<div>');
                 const rating = result[j].rating.toUpperCase();
@@ -69,8 +70,8 @@ $(document).on('click', '.js-GIF-it', function(){
                 div.prepend(img);
                 $(div).appendTo('.result').addClass('js-gif-click');
             }
-            gifCounter = gifCounter+4;
-            gifCount = gifCount + 4
+            gifCounter = gifCounter+10;
+            gifCount = gifCount + 10;
         })
         
         let clicked = false
@@ -85,6 +86,6 @@ $(document).on('click', '.js-GIF-it', function(){
                 clicked = true;
             }
         })
-        gifCount = gifCount + 4
+        gifCount = gifCount + 10
     })
 })
