@@ -46,10 +46,12 @@ img:hover {
 }
 
 .css-image {
-    margin-bottom: 30px
+    margin-bottom: 10px
 }
+
 .js-gif-click {
     position: relative;
+    /* justify-content: center; */
 }
 
 .result {
